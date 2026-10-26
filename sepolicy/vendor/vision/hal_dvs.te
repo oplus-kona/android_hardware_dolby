@@ -18,4 +18,11 @@ allow hal_dvs_default vendor_sysfs_graphics:file { getattr open read };
 init_daemon_domain(hal_dvs_default)
 set_prop(hal_dvs_server, vendor_dolbyv_prop)
 binder_use(hal_dvs_default)
+hwbinder_use(hal_dvs_default)
+hal_client_domain(hal_dvs_default, hal_allocator)
+hal_client_domain(hal_dvs_default, hal_graphics_allocator)
+hal_attribute_hwservice(vendor_hal_dolby_dvs, hal_dvs_hwservice)
+allow hal_dvs_default sysfs_leds:dir search;
+allow hal_dvs_default sysfs_leds:file { getattr open read };
 hal_server_domain(hal_dvs_default, hal_dvs)
+hal_server_domain(hal_dvs_default, vendor_hal_dolby_dvs)
